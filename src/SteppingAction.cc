@@ -129,7 +129,8 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   if(PrePoint->GetTouchableHandle()->GetVolume()->GetName() == "Target" &&
 		  endPoint->GetTouchableHandle()->GetVolume()->GetName() != "Target" && pdg!=22)
   {
-  output << pdg << "  " << momDir.x()/CLHEP::MeV << " " << momDir.y()/CLHEP::MeV<< " " <<  momDir.z()/CLHEP::MeV
+//output << pdg << "  " << momDir.x()/CLHEP::MeV << " " << momDir.y()/CLHEP::MeV<< " " <<  momDir.z()/CLHEP::MeV
+  output << pdg << "  " << momentum.x()/CLHEP::MeV << " " << momentum.y()/CLHEP::MeV<< " " <<  momentum.z()/CLHEP::MeV
 	  << " " <<  TotalEnergy/CLHEP::MeV << " "
 	  << pos.y()/CLHEP::cm << " " << pos.z()/CLHEP::cm << " " << G4endl;
   }
