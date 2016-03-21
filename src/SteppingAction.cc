@@ -117,12 +117,12 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
 
   G4StepPoint* endPoint = aStep->GetPostStepPoint();
   G4Track* aTrack = aStep->GetTrack();
-  G4ThreeVector pos               =      aTrack->GetPosition();
+  G4ThreeVector pos               =      aTrack->GetPosition()/CLHEP::cm;
   G4ThreeVector direction = endPoint->GetMomentumDirection();
   G4ThreeVector momentum = endPoint->GetMomentum()/CLHEP::MeV;
   G4ThreeVector momDir    = aTrack->GetMomentumDirection();
   G4String particleName = aTrack->GetDynamicParticle()->GetDefinition()->GetParticleName();
-  G4double TotalEnergy = endPoint->GetTotalEnergy();
+  G4double TotalEnergy = endPoint->GetTotalEnergy()/CLHEP::MeV;
   G4int pdg = aTrack->GetDefinition()->GetPDGEncoding();
 
   std::ofstream &output = fRunAction->GetOutput();
@@ -130,9 +130,8 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
 		  endPoint->GetTouchableHandle()->GetVolume()->GetName() != "Target" && pdg!=22)
   {
 //output << pdg << "  " << momDir.x()/CLHEP::MeV << " " << momDir.y()/CLHEP::MeV<< " " <<  momDir.z()/CLHEP::MeV
-  output << pdg << "  " << momentum.x()/CLHEP::MeV << " " << momentum.y()/CLHEP::MeV<< " " <<  momentum.z()/CLHEP::MeV
-	  << " " <<  TotalEnergy/CLHEP::MeV << " "
-	  << pos.y()/CLHEP::cm << " " << pos.z()/CLHEP::cm << " " << G4endl;
+  output << pdg << "  " << momentum.x() << " " << momentum.y()<< " " <<  momentum.z()
+	  << " " <<  TotalEnergy << " " << pos.y() << " " << pos.z() << " " << G4endl;
   }
 }
 
