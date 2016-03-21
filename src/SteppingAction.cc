@@ -119,10 +119,10 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   G4Track* aTrack = aStep->GetTrack();
   G4ThreeVector pos               =      aTrack->GetPosition()/CLHEP::cm;
   G4ThreeVector direction = endPoint->GetMomentumDirection();
-  G4ThreeVector momentum = endPoint->GetMomentum()/CLHEP::MeV;
+  G4ThreeVector momentum = aTrack->GetMomentum()/CLHEP::MeV;
   G4ThreeVector momDir    = aTrack->GetMomentumDirection();
   G4String particleName = aTrack->GetDynamicParticle()->GetDefinition()->GetParticleName();
-  G4double TotalEnergy = endPoint->GetTotalEnergy()/CLHEP::MeV;
+  G4double TotalEnergy = aTrack->GetTotalEnergy()/CLHEP::MeV;
   G4int pdg = aTrack->GetDefinition()->GetPDGEncoding();
 
   std::ofstream &output = fRunAction->GetOutput();
